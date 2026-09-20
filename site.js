@@ -125,7 +125,7 @@
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function fmtDate(s) {
-    var d = new Date(s); if (isNaN(d)) { var m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(s || ""); if (m) d = new Date(+m[3], m[1] - 1, +m[2]); }
+    var d = /^\d+(\.\d+)?$/.test(String(s || "").trim()) ? new Date((parseFloat(s) - 25569) * 86400000) : new Date(s); if (isNaN(d)) { var m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(s || ""); if (m) d = new Date(+m[3], m[1] - 1, +m[2]); }
     if (isNaN(d)) return "";
     return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
   }
