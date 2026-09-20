@@ -198,9 +198,9 @@
 
   /* ---------- registry ---------- */
   function renderRegistry() {
-    var r = document.getElementById("registry-original");
-    if (!r) return;
-    if (C.REGISTRY_URL) { r.href = C.REGISTRY_URL; } else { r.parentElement.style.display = "none"; }
+    var s = document.getElementById("registry-spain"), w = document.getElementById("registry-world");
+    if (s) { if (C.REGISTRY_SPAIN_URL) s.href = C.REGISTRY_SPAIN_URL; else s.style.display = "none"; }
+    if (w) { if (C.REGISTRY_WORLD_URL) w.href = C.REGISTRY_WORLD_URL; else w.style.display = "none"; }
   }
 
   /* ---------- reveal on scroll ---------- */

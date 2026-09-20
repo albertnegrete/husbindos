@@ -36,8 +36,9 @@ window.HUSBINDOS = {
   // YouTube video ID (the part after v= in the URL). Leave "" until the film is out.
   VIDEO_YOUTUBE_ID: "",
 
-  // Original registry link (shown on the Registry page). Leave "" to hide.
-  REGISTRY_URL: "",
+  // Registry links (from the invite): the "Husbindo Foundation".
+  REGISTRY_SPAIN_URL: "https://docs.google.com/document/d/19XXLCVCox3cqCZz5wRvOufY044irC140zY20Ond_GNA/edit",
+  REGISTRY_WORLD_URL: "https://www.zola.com/registry/albertandjay",
 
   // The card artwork (plum paper + gold peacocks) from the Paperless Post invite.
   // The site first tries the local copy at site/assets/card.jpg; if that file
