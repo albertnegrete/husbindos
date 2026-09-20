@@ -3,9 +3,19 @@
 //  Edit the values below; nothing else needs to change.
 // ============================================================
 window.HUSBINDOS = {
-  // Apps Script Web App URL (ends in /exec). Leave "" until deployed —
-  // the forms will show a friendly "not open yet" message.
-  API_URL: "",
+  // ---- Notes & registry backend: Google Forms + a published Sheet tab ----
+  // Submissions post straight into the Google Forms below (which feed the Sheet
+  // "husbindos. — Notes & Registry"). The public wall reads the "Public" tab,
+  // published as CSV. Hide a note by setting its "Show" cell to FALSE.
+  NOTES_FORM: {
+    action: "https://docs.google.com/forms/u/0/d/e/1FAIpQLScZs2ffdSJ8R7f0gO8v2HVmTmkm7Ek8zwDVkPtQB3eWXA2sXQ/formResponse",
+    fields: { name: "entry.1752154234", message: "entry.1806787441" }
+  },
+  REGISTRY_FORM: {
+    action: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd_FLNwz5Bc8lvL9o_XElgvBuBiFUJqeRkZCZQDKQaqUu-tAw/formResponse",
+    fields: { name: "entry.1514671729", email: "entry.667598543", gift: "entry.1822823525", link: "entry.1281548187", message: "entry.1449450496" }
+  },
+  NOTES_CSV: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLbVmzYcBJKo_GoVJYWr32DPc0KT2yQuBE3v71zF0PBHOTlLrfUkhym0JP_THr09lvCYkeo9YeL6TR/pub?gid=0&single=true&output=csv",
 
   // Google Drive folder where guests drop their photos.
   // Sharing must be: Anyone with the link → Editor (or Contributor).

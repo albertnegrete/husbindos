@@ -79,19 +79,21 @@
     });
   }
 
-  /* ---------- API ---------- */
-  function apiReady() { return !!(C.API_URL && /^https:\/\//.test(C.API_URL)); }
+  /* ---------- API: Google Forms (write) + published Sheet CSV (read) ---------- */
+  function formCfg(kind) { return kind === "note" ? C.NOTES_FORM : C.REGISTRY_FORM; }
+  function apiReady(kind) { var f = formCfg(kind); return !!(f && f.action && f.fields); }
 
-  function post(payload) {
-    // text/plain avoids a CORS preflight; Apps Script parses the JSON body.
-    return fetch(C.API_URL, { method: "POST", body: JSON.stringify(payload), headers: { "Content-Type": "text/plain;charset=utf-8" }, redirect: "follow" })
-      .then(function (r) { return r.json(); });
+  function post(kind, data) {
+    var f = formCfg(kind), body = new URLSearchParams();
+    Object.keys(f.fields).forEach(function (k) { if (data[k] != null) body.append(f.fields[k], data[k]); });
+    // Google Forms accepts cross-origin posts but returns an opaque response.
+    return fetch(f.action, { method: "POST", mode: "no-cors", body: body, headers: { "Content-Type": "application/x-www-form-urlencoded" } });
   }
 
   function wireForm(form, kind) {
     var status = form.querySelector(".status");
     var btn = form.querySelector("button[type=submit]");
-    if (!apiReady()) {
+    if (!apiReady(kind)) {
       status.className = "status err";
       status.textContent = "The guestbook isn't open yet — check back in a day or two.";
       btn.disabled = true;
@@ -99,45 +101,64 @@
     }
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
-      var data = { kind: kind };
-      new FormData(form).forEach(function (v, k) { data[k] = v; });
+      var data = {};
+      new FormData(form).forEach(function (v, k) { data[k] = String(v).trim(); });
+      if (data.website) { form.reset(); return; } // honeypot
+      var required = kind === "note" ? ["name", "message"] : ["name", "gift"];
+      for (var i = 0; i < required.length; i++) {
+        if (!data[required[i]]) { status.className = "status err"; status.textContent = "Please fill in the " + (required[i] === "message" ? "note" : required[i]) + "."; return; }
+      }
       btn.disabled = true;
       status.className = "status";
       status.textContent = "Sending…";
-      post(data).then(function (res) {
-        if (res && res.ok) {
-          status.className = "status ok";
-          status.textContent = kind === "note" ? "Thank you — your note is on the wall." : "Thank you — we've got it and we'll be in touch.";
-          form.reset();
-          if (kind === "note") loadNotes(true);
-        } else {
-          throw new Error((res && res.error) || "Something went wrong.");
-        }
-      }).catch(function (err) {
+      post(kind, data).then(function () {
+        status.className = "status ok";
+        status.textContent = kind === "note" ? "Thank you — your note is on its way to the wall." : "Thank you — we've got it and we'll be in touch.";
+        form.reset();
+        if (kind === "note") setTimeout(function () { loadNotes(true); }, 2500);
+      }).catch(function () {
         status.className = "status err";
-        status.textContent = "Hmm, that didn't send (" + err.message + "). Please try again.";
+        status.textContent = "Hmm, that didn't send. Please try again.";
       }).finally(function () { btn.disabled = false; });
     });
   }
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
-  function fmtDate(iso) {
-    var d = new Date(iso); if (isNaN(d)) return "";
+  function fmtDate(s) {
+    var d = new Date(s); if (isNaN(d)) { var m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(s || ""); if (m) d = new Date(+m[3], m[1] - 1, +m[2]); }
+    if (isNaN(d)) return "";
     return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+  }
+  // Minimal RFC-4180 CSV parser (handles quoted fields with commas/newlines).
+  function parseCSV(text) {
+    var rows = [], row = [], cur = "", q = false;
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i];
+      if (q) {
+        if (ch === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; }
+        else cur += ch;
+      } else if (ch === '"') q = true;
+      else if (ch === ",") { row.push(cur); cur = ""; }
+      else if (ch === "\n" || ch === "\r") { if (ch === "\r" && text[i + 1] === "\n") i++; row.push(cur); rows.push(row); row = []; cur = ""; }
+      else cur += ch;
+    }
+    if (cur.length || row.length) { row.push(cur); rows.push(row); }
+    return rows;
   }
 
   function loadNotes(quiet) {
     var wall = document.getElementById("wall");
     if (!wall) return;
-    if (!apiReady()) { wall.innerHTML = '<div class="empty">Notes will appear here soon.</div>'; return; }
+    if (!C.NOTES_CSV) { wall.innerHTML = '<div class="empty">Notes will appear here soon.</div>'; return; }
     if (!quiet) wall.innerHTML = '<div class="empty">Gathering notes…</div>';
-    fetch(C.API_URL + (C.API_URL.indexOf("?") > -1 ? "&" : "?") + "t=" + Date.now(), { redirect: "follow" })
-      .then(function (r) { return r.json(); })
-      .then(function (res) {
-        var notes = (res && res.notes) || [];
-        if (!notes.length) { wall.innerHTML = '<div class="empty">Be the first to leave a note.</div>'; return; }
-        wall.innerHTML = notes.map(function (n) {
-          return '<article class="note"><span class="q">“</span><p>' + esc(n.message) + '</p><div><span class="who">' + esc(n.name) + '</span><span class="when">' + fmtDate(n.t) + "</span></div></article>";
+    fetch(C.NOTES_CSV + "&t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.text(); })
+      .then(function (text) {
+        var rows = parseCSV(text).slice(1).filter(function (r) { return r[1] && r[2]; });
+        if (!rows.length) { wall.innerHTML = '<div class="empty">Be the first to leave a note.</div>'; return; }
+        rows.reverse();
+        wall.innerHTML = rows.map(function (r) {
+          return '<article class="note"><span class="q">“</span><p>' + esc(r[2]) + '</p><div><span class="who">' + esc(r[1]) + '</span><span class="when">' + fmtDate(r[0]) + "</span></div></article>";
         }).join("");
       })
       .catch(function () { wall.innerHTML = '<div class="empty">Couldn’t load the notes right now.</div>'; });
