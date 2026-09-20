@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registry — husbindos.</title>
+<meta name="theme-color" content="#4A1B36">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body data-page="registry">
+<header id="site-header"></header>
+
+<section class="section">
+  <div class="wrap narrow">
+    <div class="section-head rv">
+      <div class="eyebrow">Gifts</div>
+      <h1>The registry is <em>still open</em></h1>
+      <span data-divider></span>
+      <p>Your presence was the present. But if you'd still like to send something our way, the registry stays open through the end of the year — and late additions are very welcome.</p>
+      <p style="margin-top:18px"><a class="btn ghost" id="registry-original" href="#" target="_blank" rel="noopener">Open the registry <span data-icon="out" style="display:inline-flex;width:16px"></span></a></p>
+    </div>
+
+    <div class="section-head rv" style="margin-top:56px">
+      <div class="eyebrow">Late additions</div>
+      <h2>Tell us what you're <em>sending</em></h2>
+      <p>Sending something outside the registry, or contributing to the honeymoon fund? Let us know here so nothing gets lost and every gift gets its thank-you.</p>
+    </div>
+
+    <form class="form rv" id="registry-form" novalidate>
+      <div class="field"><label for="r-name">Your name</label><input id="r-name" name="name" type="text" required maxlength="80" autocomplete="name"></div>
+      <div class="field"><label for="r-email">Email (so we can thank you properly)</label><input id="r-email" name="email" type="email" maxlength="120" autocomplete="email"></div>
+      <div class="field"><label for="r-gift">Gift or contribution</label><input id="r-gift" name="gift" type="text" required maxlength="200" placeholder="e.g. A night in Lisbon, or the ceramic set"></div>
+      <div class="field"><label for="r-link">Link (optional)</label><input id="r-link" name="link" type="url" maxlength="400" placeholder="https://"></div>
+      <div class="field"><label for="r-msg">A message (optional)</label><textarea id="r-msg" name="message" maxlength="1000" style="min-height:100px"></textarea></div>
+      <div class="field hp" aria-hidden="true"><label for="r-web">Website</label><input id="r-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <div class="form-foot">
+        <span class="hint">Only the two of us see this.</span>
+        <button class="btn" type="submit">Send</button>
+      </div>
+      <div class="status" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+<footer id="site-footer"></footer>
+<script src="site.js"></script>
+</body>
+</html>

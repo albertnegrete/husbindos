@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photos — husbindos.</title>
+<meta name="theme-color" content="#4A1B36">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+</head>
+<body data-page="photos">
+<header id="site-header"></header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="eyebrow">Pictures</div>
+      <h1>Your phone saw things <em>we missed</em></h1>
+      <span data-divider></span>
+      <p>Drop everything — the blurry ones too. They all go into a shared album we'll treasure, and we'll pick the best for the wall.</p>
+    </div>
+
+    <div class="two rv">
+      <div class="panel">
+        <h3>Share your photos</h3>
+        <p>Uploads go straight to a shared Google Drive folder. Works from any phone or laptop.</p>
+        <ol class="steps">
+          <li>Tap the button below (a Google account is needed to upload).</li>
+          <li>Hit <strong>+ New → File upload</strong>, or drag files in.</li>
+          <li>Videos are welcome too.</li>
+        </ol>
+        <a class="btn gold" id="upload-link" href="#" target="_blank" rel="noopener"><span data-icon="up" style="display:inline-flex;width:16px"></span> Upload to the album</a>
+      </div>
+      <div class="panel">
+        <h3>The official set</h3>
+        <p>The photographer's edit will be published below and downloadable in full resolution from Drive.</p>
+        <a class="btn ghost" id="gallery-link" href="#" target="_blank" rel="noopener">Open the full gallery <span data-icon="out" style="display:inline-flex;width:16px"></span></a>
+      </div>
+    </div>
+
+    <div id="gallery-host" class="rv"></div>
+  </div>
+</section>
+
+<footer id="site-footer"></footer>
+<script src="site.js"></script>
+</body>
+</html>
