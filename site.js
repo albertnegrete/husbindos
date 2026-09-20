@@ -185,6 +185,19 @@
     }
   }
 
+  /* ---------- home photos ---------- */
+  function renderHomePhotos() {
+    var sec = document.getElementById("home-photos"), strip = document.getElementById("home-photo-strip");
+    if (!sec || !strip) return;
+    var list = (C.HOME_PHOTOS || []).filter(function (p) { return p && p.src; });
+    if (!list.length) return;
+    sec.hidden = false;
+    strip.className = "photo-strip rv" + (list.length === 1 ? " single" : "");
+    strip.innerHTML = list.map(function (p) {
+      return '<figure><img src="' + esc(p.src) + '" alt="' + esc(p.caption || "Wedding photograph") + '" loading="lazy">' + (p.caption ? "<figcaption>" + esc(p.caption) + "</figcaption>" : "") + "</figure>";
+    }).join("");
+  }
+
   /* ---------- video ---------- */
   function renderVideo() {
     var frame = document.getElementById("video-frame");
@@ -218,6 +231,6 @@
     renderHeader(); renderFooter(); renderCard();
     var nf = document.getElementById("note-form"); if (nf) wireForm(nf, "note");
     var rf = document.getElementById("registry-form"); if (rf) wireForm(rf, "registry");
-    loadNotes(); renderPhotos(); renderVideo(); renderRegistry(); reveal();
+    loadNotes(); renderPhotos(); renderHomePhotos(); renderVideo(); renderRegistry(); reveal();
   });
 })();

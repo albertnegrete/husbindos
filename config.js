@@ -49,6 +49,11 @@ window.HUSBINDOS = {
   // Where the Paperless Post invite lives.
   INVITE_URL: "https://pp.events/husbindos",
 
+  // Photos shown on the home page (in site/assets). Add more entries as they come.
+  HOME_PHOTOS: [
+    { src: "assets/ceremony-01.jpg", caption: "The vows. Paranimf, Universitat de Barcelona." }
+  ],
+
   // Couple + event details
   NAMES: ["Jay", "Albert"],
   DATE_LONG: "September 19, 2026",
