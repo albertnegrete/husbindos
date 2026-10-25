@@ -33,8 +33,18 @@ window.HUSBINDOS = {
   // Toggle once the photographer has delivered.
   PHOTOGRAPHER_READY: false,
 
-  // YouTube video ID (the part after v= in the URL). Leave "" until the film is out.
-  VIDEO_YOUTUBE_ID: "",
+  // The films. Paste each YouTube ID (the part after v= in the URL) as the
+  // videographer delivers the final cuts; leave "" and the film shows as
+  // "still in the edit". Optional: poster (image URL) overrides the YouTube
+  // thumbnail; tone is the screen colour: sapphire | emerald | garnet.
+  FILMS: [
+    { title: "The trailer",    runtime: "5 min",  youtube: "", tone: "sapphire",
+      blurb: "The whole day in five minutes. Start here, then send it to your mother." },
+    { title: "The film",       runtime: "42 min", youtube: "", tone: "emerald",
+      blurb: "The ceremony at the Paranimf, the speeches, the first dance, and the parts you missed while you were at the bar." },
+    { title: "Off the record", runtime: "42 min", youtube: "", tone: "garnet",
+      blurb: "The guests, one by one, in the confessional. Some of you were very honest. Nothing has been cut." }
+  ],
 
   // Registry links (from the invite): the "Husbindo Foundation".
   REGISTRY_SPAIN_URL: "https://docs.google.com/document/d/19XXLCVCox3cqCZz5wRvOufY044irC140zY20Ond_GNA/edit",
@@ -49,9 +59,20 @@ window.HUSBINDOS = {
   // Where the Paperless Post invite lives.
   INVITE_URL: "https://pp.events/husbindos",
 
-  // Photos shown on the home page (in site/assets). Add more entries as they come.
+  // The two snapshots on the home page (in site/assets). Captions optional.
   HOME_PHOTOS: [
-    { src: "assets/ceremony-01.jpg", caption: "The vows. Paranimf, Universitat de Barcelona." }
+    { src: "assets/courtyard.jpg", alt: "Guests hugging the grooms at a table in the courtyard" },
+    { src: "assets/selfie.jpg",    alt: "Five guests in hats and fascinators taking a selfie" }
+  ],
+
+  // The "So far" grid on the photos page: up to five pictures, in this order
+  // (portrait, landscape, portrait, portrait, landscape works best).
+  GALLERY_PHOTOS: [
+    { src: "assets/ceremony-01.jpg", alt: "Jay and Albert exchanging rings in the Paranimf" },
+    { src: "assets/courtyard.jpg",   alt: "The courtyard" },
+    { src: "assets/three.jpg",       alt: "Three of us in the courtyard" },
+    { src: "assets/garden.jpg",      alt: "Guests by the pond" },
+    { src: "assets/selfie.jpg",      alt: "The hat committee" }
   ],
 
   // Couple + event details

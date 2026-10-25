@@ -7,43 +7,42 @@
 <meta name="theme-color" content="#4A1B36">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="config.js"></script>
 </head>
 <body data-page="photos">
 <header id="site-header"></header>
 
-<section class="section">
-  <div class="wrap">
-    <div class="section-head rv">
-      <div class="eyebrow">Pictures</div>
-      <h1>Your phone saw things <em>we missed</em></h1>
-      <span data-divider></span>
-      <p>Drop everything — the blurry ones too. They all go into a shared album we'll treasure, and we'll pick the best for the wall.</p>
-    </div>
+<div class="band pagehead"><div class="inner">
+  <div class="eyebrow">The gallery</div>
+  <h1>Your photos, <em>and ours.</em></h1>
+  <span data-flourish></span>
+  <p class="sub">Yours now, the photographer’s soon.</p>
+</div></div>
 
-    <div class="two rv">
-      <div class="panel">
-        <h3>Share your photos</h3>
-        <p>Uploads go straight to a shared Google Drive folder. Works from any phone or laptop.</p>
-        <ol class="steps">
-          <li>Tap the button below (a Google account is needed to upload).</li>
-          <li>Hit <strong>+ New → File upload</strong>, or drag files in.</li>
-          <li>Videos are welcome too.</li>
-        </ol>
-        <a class="btn gold" id="upload-link" href="#" target="_blank" rel="noopener"><span data-icon="up" style="display:inline-flex;width:16px"></span> Upload to the album</a>
-      </div>
-      <div class="panel">
-        <h3>The official set</h3>
-        <p>The photographer's edit will be published below and downloadable in full resolution from Drive.</p>
-        <a class="btn ghost" id="gallery-link" href="#" target="_blank" rel="noopener">Open the full gallery <span data-icon="out" style="display:inline-flex;width:16px"></span></a>
-      </div>
-    </div>
-
-    <div id="gallery-host" class="rv"></div>
+<div class="band section"><div class="inner split">
+  <div>
+    <div class="eyebrow">From your phones</div>
+    <h2>Drop yours in <em>the folder</em></h2>
+    <p>Everything goes into one shared Google Drive folder. On a phone, open it in the Drive app; on a laptop you may be asked to sign in.</p>
+    <ol><li>Open the folder.</li><li>Tap <strong>+</strong> or drag files in.</li><li>Originals, please. Videos are welcome too.</li></ol>
+    <div class="act"><a class="btn" id="upload-link" href="#" target="_blank" rel="noopener">Upload to the folder ↗</a></div>
   </div>
-</section>
+  <div>
+    <div class="eyebrow">From the photographer</div>
+    <h2>The official <em>set</em></h2>
+    <p>Still in the edit. We’ll put the full gallery here the day it arrives and let everyone know.</p>
+    <div class="act"><a class="btn ghost" id="gallery-link" href="#" target="_blank" rel="noopener">Open the full gallery ↗</a></div>
+  </div>
+</div></div>
+
+<div class="band section rule" id="gallery-host" hidden><div class="inner"></div></div>
+
+<div class="band section rule"><div class="inner">
+  <div class="eyebrow" style="margin-bottom:28px">So far</div>
+  <div class="gallery" id="so-far"></div>
+</div></div>
 
 <footer id="site-footer"></footer>
 <script src="site.js"></script>

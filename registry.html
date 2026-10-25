@@ -7,47 +7,30 @@
 <meta name="theme-color" content="#4A1B36">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="config.js"></script>
 </head>
 <body data-page="registry">
 <header id="site-header"></header>
 
-<section class="section">
-  <div class="wrap narrow">
-    <div class="section-head rv">
-      <div class="eyebrow">Gifts</div>
-      <h1>The Husbindo <em>Foundation</em></h1>
-      <span data-divider></span>
-      <p>Your presence was the present — truly. For anyone who asked where the registry lives, here it is.</p>
-      <p style="margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a class="btn" id="registry-spain" href="#" target="_blank" rel="noopener">Residents of Spain</a>
-        <a class="btn ghost" id="registry-world" href="#" target="_blank" rel="noopener">Rest of the world <span data-icon="out" style="display:inline-flex;width:16px"></span></a>
-      </p>
-    </div>
+<div class="band pagehead"><div class="inner">
+  <div class="eyebrow">The Husbindo Foundation</div>
+  <h1>The <em>registry.</em></h1>
+  <span data-flourish></span>
+  <p class="sub">For anyone who asked where it lives.</p>
+</div></div>
 
-    <div class="section-head rv" style="margin-top:56px">
-      <div class="eyebrow">Late additions</div>
-      <h2>Did you send <em>something</em>?</h2>
-      <p>If a gift came to us outside the registry, leave a line here so nothing gets lost and every one of them gets a proper thank-you.</p>
-    </div>
+<div class="band section"><div class="inner dest">
+  <a id="registry-spain" href="#" target="_blank" rel="noopener"><h3>In Spain</h3><p>Bizum and bank details, in one short document.</p><span class="tag">Open</span></a>
+  <a id="registry-world" href="#" target="_blank" rel="noopener"><h3>Everywhere else</h3><p>Our Zola page, for cards and contributions from abroad.</p><span class="tag">Zola</span></a>
+</div></div>
 
-    <form class="form rv" id="registry-form" novalidate>
-      <div class="field"><label for="r-name">Your name</label><input id="r-name" name="name" type="text" required maxlength="80" autocomplete="name"></div>
-      <div class="field"><label for="r-email">Email (so we can thank you properly)</label><input id="r-email" name="email" type="email" maxlength="120" autocomplete="email"></div>
-      <div class="field"><label for="r-gift">Gift or contribution</label><input id="r-gift" name="gift" type="text" required maxlength="200" placeholder="e.g. the ceramic set"></div>
-      <div class="field"><label for="r-link">Link (optional)</label><input id="r-link" name="link" type="url" maxlength="400" placeholder="https://"></div>
-      <div class="field"><label for="r-msg">A message (optional)</label><textarea id="r-msg" name="message" maxlength="1000" style="min-height:100px"></textarea></div>
-      <div class="field hp" aria-hidden="true"><label for="r-web">Website</label><input id="r-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-      <div class="form-foot">
-        <span class="hint">Only the two of us see this.</span>
-        <button class="btn" type="submit">Send</button>
-      </div>
-      <div class="status" role="status" aria-live="polite"></div>
-    </form>
-  </div>
-</section>
+<div class="band thanks"><div class="inner thanks" style="padding:0">
+  <span data-flourish></span>
+  <h2>Thank <em>you.</em></h2>
+  <p>Whatever you sent, and even if you sent nothing but yourselves:<br>gràcies, thank you.</p>
+</div></div>
 
 <footer id="site-footer"></footer>
 <script src="site.js"></script>
