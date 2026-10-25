@@ -318,3 +318,28 @@ body[data-page="video"] .smallprint .lede{color:var(--paper)}
 .screen .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:saturate(.7)}
 .screen .holding{cursor:pointer}
 .screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ---- phones: shorter hero photo, centred invitation peacock ---- */
+@media (max-width:900px){.hero .pic{aspect-ratio:1/1;max-height:58vh}}
+@media (max-width:860px){
+  .plumband .copy{padding-bottom:12px}
+  .plumband .bird{height:320px}
+  .plumband .bird img{right:auto;left:50%;transform:translate(-50%,-50%);height:88%}
+}
+@media (max-width:480px){.statement .big{font-size:1.45rem}}
+
+/* ---- very large screens: scale the layout up instead of leaving an island ---- */
+@media (min-width:1700px){
+  html{font-size:clamp(16px,.42vw + 9px,22px)}
+  :root{--maxw:82.5rem;--gutter:max(4vw,env(safe-area-inset-left,0px));--gutter-r:max(4vw,env(safe-area-inset-right,0px))}
+  body{font-size:1.0625rem}
+  .nav .inner{height:4rem}
+  .hero{min-height:min(78vh,47.5rem)}
+  .plumband .inner,.plumband .bird{min-height:35rem}
+  .footer .crest img{height:18.75rem}
+  .footer .cols{grid-template-columns:repeat(2,minmax(0,13.75rem))}
+  .drive-frame{height:40rem}
+  .pgallery{grid-template-columns:repeat(auto-fill,minmax(13.75rem,1fr))}
+  .form{max-width:47.5rem}
+  .screen{max-width:min(100%,calc((100vh - 12rem) * 16 / 9));margin-inline:auto}
+}
