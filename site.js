@@ -246,14 +246,14 @@
       h.addEventListener("click", function () { play(i); });
       h.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(i); } });
     }
-    function play(i) {
+    function play(i) { // loads the player; it waits for the viewer to press play
       var f = films[i];
       if (!f.youtube) return;
-      screen.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(f.youtube) + '?autoplay=1&rel=0&modestbranding=1&color=white" title="' + esc(f.title) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+      screen.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(f.youtube) + '?rel=0&modestbranding=1&color=white" title="' + esc(f.title) + '" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
     }
     function select(i, scroll) {
       current = i;
-      poster(i);
+      if (films[i].youtube) play(i); else poster(i);
       prog.querySelectorAll("button").forEach(function (b, k) {
         var on = k === i;
         b.setAttribute("aria-pressed", on ? "true" : "false");
@@ -273,7 +273,7 @@
     prog.querySelectorAll("button").forEach(function (b) {
       b.addEventListener("click", function () {
         var i = +b.dataset.i;
-        if (i === current && films[i].youtube) { play(i); document.querySelector(".screen").scrollIntoView({ behavior: "smooth", block: "center" }); }
+        if (i === current && films[i].youtube) document.querySelector(".screen").scrollIntoView({ behavior: "smooth", block: "center" });
         else select(i, true);
       });
     });
