@@ -38,7 +38,7 @@ window.HUSBINDOS = {
   // "still in the edit". Optional: poster (image URL) overrides the YouTube
   // thumbnail; tone is the screen colour: sapphire | emerald | garnet.
   FILMS: [
-    { title: "The trailer",    runtime: "5 min",  youtube: "", tone: "sapphire",
+    { title: "The trailer",    runtime: "5 min",  youtube: "mjFClgLQmK0", tone: "sapphire",
       blurb: "The whole day in five minutes. Start here, then send it to your mother." },
     { title: "The film",       runtime: "42 min", youtube: "", tone: "emerald",
       blurb: "The ceremony at the Paranimf, the speeches, the first dance, and the parts you missed while you were at the bar." },
