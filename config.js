@@ -61,8 +61,8 @@ window.HUSBINDOS = {
 
   // The two snapshots on the home page (in site/assets). Captions optional.
   HOME_PHOTOS: [
-    { src: "assets/courtyard.jpg", alt: "Guests hugging the grooms at a table in the courtyard" },
-    { src: "assets/selfie.jpg",    alt: "Five guests in hats and fascinators taking a selfie" }
+    { src: "assets/head-table.jpg", alt: "The grooms laughing at the head table while four guests strike poses behind them in the courtyard", caption: "The head table, briefly under control." },
+    { src: "assets/selfie.jpg",     alt: "Five guests in hats and fascinators taking a selfie", caption: "The hat committee." }
   ],
 
   // The "So far" grid on the photos page: up to five pictures, in this order

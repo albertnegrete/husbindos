@@ -112,12 +112,13 @@ em{font-style:italic}
 .strip figure{margin:0;display:flex;flex-direction:column;gap:12px}
 .strip figure img{width:100%;height:100%;object-fit:cover}
 .strip figcaption{font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:1.02rem}
-.strip .a{grid-column:1/9}.strip .a .ph{aspect-ratio:4/3}
-.strip .b{grid-column:9/13;padding-top:clamp(40px,8vw,120px)}.strip .b .ph{aspect-ratio:4/5}
+.strip .a{grid-column:1/8}.strip .a .ph{aspect-ratio:3/2}
+.strip .b{grid-column:8/13}.strip .b .ph{flex:1;position:relative;min-height:0}
+.strip .b .ph img{position:absolute;inset:0;object-position:50% 40%}
 .strip .ph{overflow:hidden;background:var(--cream-2)}
 .strip .ph img{transition:transform 1.2s ease}
 .strip figure:hover .ph img{transform:scale(1.03)}
-@media (max-width:760px){.strip .a,.strip .b{grid-column:1/-1}.strip .b{padding-top:0}}
+@media (max-width:760px){.strip .a,.strip .b{grid-column:1/-1}.strip .b .ph{flex:none;aspect-ratio:4/3}}
 
 /* ---- plum band: the invitation ---- */
 .plumband{background:var(--plum);color:var(--paper);position:relative;overflow:hidden}
