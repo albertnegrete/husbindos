@@ -42,7 +42,7 @@ window.HUSBINDOS = {
       blurb: "The whole day in five minutes. Start here, then send it to your mother." },
     { title: "The film",       runtime: "42 min", youtube: "KyW7WYwBN4E", tone: "emerald",
       blurb: "The ceremony at the Paranimf, the speeches, the first dance, and the parts you missed while you were at the bar." },
-    { title: "Off the record", runtime: "42 min", youtube: "", tone: "garnet",
+    { title: "Off the record", runtime: "42 min", youtube: "77MXh8a5HwM", tone: "garnet",
       blurb: "The guests, one by one, in the confessional. Some of you were very honest. Nothing has been cut." }
   ],
 
