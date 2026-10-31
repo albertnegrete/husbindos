@@ -321,6 +321,9 @@ body[data-page="video"] .smallprint .lede{color:var(--paper)}
 .chips .inner::-webkit-scrollbar{display:none}
 .chips a{flex:none;font-family:var(--sans);font-weight:400;text-transform:uppercase;letter-spacing:.22em;font-size:.64rem;text-decoration:none;color:var(--ink-soft)}
 .chips a:hover{color:var(--plum)}
+.chips a.add{margin-left:auto;color:var(--plum);border-bottom:1px solid var(--gold);padding-bottom:3px}
+#add-yours{scroll-margin-top:7rem}
+.pagehead .tlink.add{margin-top:6px}
 .chips a b{font-weight:400;color:var(--gold-dim);margin-left:6px;letter-spacing:.04em}
 .chapter{padding-block:clamp(44px,6vw,84px);scroll-margin-top:7rem}
 .chapter + .chapter{border-top:1px solid var(--rule)}

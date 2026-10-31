@@ -213,7 +213,7 @@
     }
     document.getElementById("chips").innerHTML = chapters.map(function (c) {
       return '<a href="#' + c.id + '">' + esc(c.title) + "<b>" + c.list.length + "</b></a>";
-    }).join("");
+    }).join("") + '<a class="add" href="#add-yours">Add yours</a>';
     host.innerHTML = chapters.map(function (c, ci) {
       var label = "See all " + c.list.length;
       return '<section class="band chapter" id="' + c.id + '"><div class="inner">' +
@@ -282,6 +282,10 @@
       startX = null;
       if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
     });
+
+    // The chapters are built after load, so land on a linked section by hand.
+    var target = location.hash && document.querySelector(location.hash);
+    if (target) target.scrollIntoView();
   }
 
   /* ---------- home snapshots ---------- */
