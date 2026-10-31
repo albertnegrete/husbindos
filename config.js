@@ -21,17 +21,22 @@ window.HUSBINDOS = {
   // Sharing must be: Anyone with the link → Editor (or Contributor).
   GUEST_UPLOAD_FOLDER_ID: "1G9vUavgxpsJAIedVrhUkQNQeDDSthM_i",
 
-  // Google Drive folder with the photographer's pictures.
-  // Sharing must be: Anyone with the link → Viewer.
-  PHOTOGRAPHER_FOLDER_ID: "1LOSR8hQgdif0-hO8hwVlIpYNmBWEkted",
+  // The photographer's set. Baixa (smaller files) and Alta (full quality) Drive
+  // folders; sharing must be: Anyone with the link → Viewer. The photo list and
+  // thumbnails live in photos-data.js and assets/photos.
+  PHOTOS_PHONE_FOLDER_ID: "14beF_ZdIvqnF1XB0jdkO_cLMiUPJw6OJ",
+  PHOTOS_PRINT_FOLDER_ID: "1bDjBxiIz-R-JilG7AvtOY2SuHzpngSMw",
 
-  // Optional: a hand-picked list of image URLs for the featured gallery
-  // (direct links, e.g. from Drive "https://lh3.googleusercontent.com/d/FILE_ID"
-  // or any host). Leave empty to show the Drive folder grid instead.
-  PHOTOGRAPHER_IMAGES: [],
-
-  // Toggle once the photographer has delivered.
-  PHOTOGRAPHER_READY: false,
+  // The chapters of the day, by photo number (the digits after "Albert&Jay" in
+  // the file name). picks are the five featured photos; the first one is big.
+  PHOTO_CHAPTERS: [
+    { id: "arrival",   title: "arrival",   from: 1,    to: 65,   picks: [29, 15, 43, 57, 1] },
+    { id: "ceremony",  title: "ceremony",  from: 66,   to: 345,  picks: [267, 197, 71, 239, 155] },
+    { id: "portraits", title: "portraits", from: 346,  to: 422,  picks: [381, 367, 395, 353, 409] },
+    { id: "cocktail",  title: "cocktail",  from: 423,  to: 583,  picks: [524, 566, 466, 423, 552] },
+    { id: "banquet",   title: "banquet",   from: 584,  to: 1014, picks: [778, 878, 720, 948, 806] },
+    { id: "party",     title: "party",     from: 1015, to: 1367, picks: [1244, 1146, 1061, 1188, 1104] }
+  ],
 
   // The films. Paste each YouTube ID (the part after v= in the URL) as the
   // videographer delivers the final cuts; leave "" and the film shows as

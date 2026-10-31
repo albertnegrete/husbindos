@@ -309,16 +309,65 @@ body[data-page="video"] .smallprint .lede{color:var(--paper)}
 .status.ok{color:var(--emerald)}
 .field.hp{position:absolute;left:-9999px;top:-9999px}
 .empty{font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--ink-soft);padding:26px 0;border-top:1px solid var(--rule)}
-/* photographer gallery (when ready) */
-.drive-frame{width:100%;height:640px;border:1px solid var(--rule);background:#fff;margin-top:32px}
-.pgallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.pgallery a{display:block;aspect-ratio:4/5;overflow:hidden;background:var(--cream-2)}
-.pgallery img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.pgallery a:hover img{transform:scale(1.04)}
 /* film poster (YouTube thumbnail under the tint) */
 .screen .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:saturate(.7)}
 .screen .holding{cursor:pointer}
 .screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ---- the photographer's set ---- */
+.split.solo{grid-template-columns:1fr}.split.solo::before{display:none}
+.chips{position:sticky;top:calc(4rem + 1px);z-index:20;background:rgba(251,247,238,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.chips .inner{display:flex;gap:clamp(18px,3vw,36px);overflow-x:auto;padding-block:14px;scrollbar-width:none}
+.chips .inner::-webkit-scrollbar{display:none}
+.chips a{flex:none;font-family:var(--sans);font-weight:400;text-transform:uppercase;letter-spacing:.22em;font-size:.64rem;text-decoration:none;color:var(--ink-soft)}
+.chips a:hover{color:var(--plum)}
+.chips a b{font-weight:400;color:var(--gold-dim);margin-left:6px;letter-spacing:.04em}
+.chapter{padding-block:clamp(44px,6vw,84px);scroll-margin-top:7rem}
+.chapter + .chapter{border-top:1px solid var(--rule)}
+.chead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(18px,2.4vw,28px)}
+.chead h2{font-size:clamp(2.2rem,4.6vw,3.8rem);font-weight:300}
+.chead .count{font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:1.1rem;margin-top:4px}
+.mosaic{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1vw,14px)}
+.tile{all:unset;box-sizing:border-box;display:block;cursor:zoom-in;overflow:hidden;background:var(--cream-2);aspect-ratio:3/2}
+.tile:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.tile img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;transition:transform .9s ease}
+.tile:hover img{transform:scale(1.03)}
+.mosaic .tile:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;position:relative}
+.mosaic .tile:first-child img{position:absolute;inset:0}
+.seeall{all:unset;cursor:pointer;display:inline-flex;gap:10px;margin-top:22px;font-weight:400;text-transform:uppercase;letter-spacing:.26em;font-size:.68rem;color:var(--plum);padding-bottom:6px;border-bottom:1px solid var(--rule-gold)}
+.seeall:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.allgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:clamp(6px,.7vw,10px);margin-top:22px}
+.allgrid .tile{aspect-ratio:1/1}
+.keep{background:var(--plum);color:var(--paper)}
+.keep .inner{padding-block:clamp(56px,8vw,104px);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:center}
+.keep h2{color:var(--paper);font-size:clamp(2.2rem,4.6vw,3.8rem);font-weight:300}.keep h2 em{color:var(--gold-light)}
+.keep .eyebrow{color:var(--gold);margin-bottom:14px}
+.keep .opts a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;padding:22px 0;border-bottom:1px solid rgba(228,201,126,.3);text-decoration:none;color:var(--paper)}
+.keep .opts a:first-child{border-top:1px solid rgba(228,201,126,.3)}
+.keep .opts h3{color:var(--paper);font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:300}
+.keep .opts p{grid-column:1;margin:0;color:rgba(246,231,198,.75);font-size:.95rem}
+.keep .opts span{grid-column:2;grid-row:1/3;align-self:center;color:var(--gold-light)}
+.lb{position:fixed;inset:0;z-index:100;background:#1B0815;color:var(--paper);display:none;grid-template-rows:auto minmax(0,1fr) auto}
+.lb.open{display:grid}
+.lb header,.lb footer{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px max(16px,3vw)}
+.lb .where{font-family:var(--serif);font-style:italic;font-size:1.1rem}
+.lb .stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:0;padding-inline:max(0px,4vw)}
+.lb .stage img{max-width:100%;max-height:100%;object-fit:contain;touch-action:pan-y}
+.lb button{all:unset;cursor:pointer;color:var(--paper)}
+.lb button:focus-visible,.lb a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.lb .x{font-size:.68rem;font-weight:400;text-transform:uppercase;letter-spacing:.24em;padding:8px 0}
+.lb .nav-b{position:absolute;top:0;bottom:0;width:18%;display:flex;align-items:center;font-size:2rem;color:var(--gold-light);padding-inline:2vw;box-sizing:border-box}
+.lb .prev{left:0}.lb .next{right:0;justify-content:flex-end}
+.lb a.dl{color:var(--plum-ink);background:var(--gold-light);font-weight:400;text-transform:uppercase;letter-spacing:.2em;font-size:.66rem;text-decoration:none;padding:11px 16px;white-space:nowrap}
+.lb a.dl:hover{background:var(--paper)}
+.lb .pos{white-space:nowrap;font-size:.8rem;color:rgba(246,231,198,.7);font-variant-numeric:tabular-nums}
+@media (max-width:760px){
+  .mosaic{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mosaic .tile:first-child{grid-column:1/-1;grid-row:auto;aspect-ratio:3/2}
+  .allgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+  .keep .inner{grid-template-columns:1fr}
+  .lb .nav-b{display:none}
+}
 
 /* ---- phones: shorter hero photo, centred invitation peacock ---- */
 @media (max-width:900px){.hero .pic{aspect-ratio:1/1;max-height:58vh}}
@@ -339,8 +388,6 @@ body[data-page="video"] .smallprint .lede{color:var(--paper)}
   .plumband .inner,.plumband .bird{min-height:35rem}
   .footer .crest img{height:18.75rem}
   .footer .cols{grid-template-columns:repeat(2,minmax(0,13.75rem))}
-  .drive-frame{height:40rem}
-  .pgallery{grid-template-columns:repeat(auto-fill,minmax(13.75rem,1fr))}
   .form{max-width:47.5rem}
   .screen{max-width:min(100%,calc((100vh - 12rem) * 16 / 9));margin-inline:auto}
 }

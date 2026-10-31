@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
 <title>Photos — husbindos.</title>
 <meta name="theme-color" content="#4A1B36">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -10,18 +11,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="config.js"></script>
+<script src="photos-data.js"></script>
 </head>
 <body data-page="photos">
 <header id="site-header"></header>
 
 <div class="band pagehead"><div class="inner">
-  <div class="eyebrow">The gallery</div>
-  <h1>Your photos, <em>and ours.</em></h1>
+  <div class="eyebrow">The official set</div>
+  <h1>The whole day, <em>frame by frame.</em></h1>
   <span data-flourish></span>
-  <p class="sub">Yours now, the photographer’s soon.</p>
+  <p class="sub"><span id="photo-count">1,350</span> photographs. Find yourself, keep what you like.</p>
 </div></div>
 
-<div class="band section"><div class="inner split">
+<nav class="band chips" aria-label="Chapters"><div class="inner" id="chips"></div></nav>
+<div id="chapters"></div>
+
+<div class="band keep"><div class="inner">
+  <div><div class="eyebrow">Take them home</div><h2>All of them, <em>if you dare.</em></h2></div>
+  <div class="opts">
+    <a id="download-phone" href="#" target="_blank" rel="noopener"><h3>For your phone</h3><p>Smaller files, about 0.7 MB each. Good for sharing.</p><span>↗</span></a>
+    <a id="download-print" href="#" target="_blank" rel="noopener"><h3>For printing</h3><p>Full quality, about 8 MB each. Good for the wall.</p><span>↗</span></a>
+  </div>
+</div></div>
+
+<div class="band section"><div class="inner split solo">
   <div>
     <div class="eyebrow">From your phones</div>
     <h2>Drop yours in <em>the folder</em></h2>
@@ -29,20 +42,18 @@
     <ol><li>Open the folder.</li><li>Tap <strong>+</strong> or drag files in.</li><li>Originals, please. Videos are welcome too.</li></ol>
     <div class="act"><a class="btn" id="upload-link" href="#" target="_blank" rel="noopener">Upload to the folder ↗</a></div>
   </div>
-  <div>
-    <div class="eyebrow">From the photographer</div>
-    <h2>The official <em>set</em></h2>
-    <p>Still in the edit. We’ll put the full gallery here the day it arrives and let everyone know.</p>
-    <div class="act"><a class="btn ghost" id="gallery-link" href="#" target="_blank" rel="noopener">Open the full gallery ↗</a></div>
-  </div>
 </div></div>
-
-<div class="band section rule" id="gallery-host" hidden><div class="inner"></div></div>
 
 <div class="band section rule"><div class="inner">
   <div class="eyebrow" style="margin-bottom:28px">So far</div>
   <div class="gallery" id="so-far"></div>
 </div></div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <header><div class="where" id="lb-where"></div><button class="x" id="lb-x">Close ✕</button></header>
+  <div class="stage"><button class="nav-b prev" id="lb-prev" aria-label="Previous photo">‹</button><img id="lb-img" alt=""><button class="nav-b next" id="lb-next" aria-label="Next photo">›</button></div>
+  <footer><span class="pos" id="lb-pos"></span><a class="dl" id="lb-dl" target="_blank" rel="noopener">Download high quality ↓</a></footer>
+</div>
 
 <footer id="site-footer"></footer>
 <script src="site.js"></script>

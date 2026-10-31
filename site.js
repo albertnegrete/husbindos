@@ -181,22 +181,7 @@
   function renderPhotos() {
     var up = document.getElementById("upload-link");
     if (up) up.href = "https://drive.google.com/drive/folders/" + C.GUEST_UPLOAD_FOLDER_ID;
-    var dl = document.getElementById("gallery-link");
-    if (dl) {
-      if (C.PHOTOGRAPHER_READY) dl.href = "https://drive.google.com/drive/folders/" + C.PHOTOGRAPHER_FOLDER_ID;
-      else dl.parentNode.style.display = "none";
-    }
-    var host = document.getElementById("gallery-host");
-    if (host) {
-      if (!C.PHOTOGRAPHER_READY) host.hidden = true;
-      else if (C.PHOTOGRAPHER_IMAGES && C.PHOTOGRAPHER_IMAGES.length) {
-        host.innerHTML = '<div class="pgallery">' + C.PHOTOGRAPHER_IMAGES.map(function (u) {
-          return '<a href="' + esc(u) + '" target="_blank" rel="noopener"><img loading="lazy" src="' + esc(u) + '" alt="Wedding photograph"></a>';
-        }).join("") + "</div>";
-      } else {
-        host.innerHTML = '<iframe class="drive-frame" title="Photographer gallery" loading="lazy" src="https://drive.google.com/embeddedfolderview?id=' + C.PHOTOGRAPHER_FOLDER_ID + '#grid"></iframe>';
-      }
-    }
+    renderPhotoSet();
     // "So far": hand-picked guest photos from config
     var g = document.getElementById("so-far");
     if (g) {
@@ -206,6 +191,97 @@
         return '<figure class="' + slots[i] + '"><div class="ph"><img src="' + esc(p.src) + '" alt="' + esc(p.alt || "") + '" loading="lazy"></div></figure>';
       }).join("") + '<div class="g6"><div class="soon">The rest of your photos appear here as the folder fills up.<small>We’ll curate lightly. Blurry ones stay; unflattering ones of us also stay, apparently.</small></div></div>';
     }
+  }
+
+  /* ---------- the photographer's set ---------- */
+  function renderPhotoSet() {
+    var host = document.getElementById("chapters"), all = window.HUSBINDOS_PHOTOS;
+    if (!host || !all) return;
+    var PAGE = 48;
+    var pad = function (n) { return ("000" + n).slice(-4); };
+    var chapters = (C.PHOTO_CHAPTERS || []).map(function (c) {
+      return { id: c.id, title: c.title, picks: c.picks, list: all.filter(function (p) { return p[0] >= c.from && p[0] <= c.to; }) };
+    });
+    var count = document.getElementById("photo-count");
+    if (count) count.textContent = all.length.toLocaleString("en-US");
+    var phone = document.getElementById("download-phone"), print = document.getElementById("download-print");
+    if (phone) phone.href = "https://drive.google.com/drive/folders/" + C.PHOTOS_PHONE_FOLDER_ID;
+    if (print) print.href = "https://drive.google.com/drive/folders/" + C.PHOTOS_PRINT_FOLDER_ID;
+
+    function tile(n, dir, ci) {
+      return '<button class="tile" type="button" data-n="' + n + '" data-c="' + ci + '" aria-label="Open photo ' + n + '"><img loading="lazy" src="assets/photos/' + dir + "/" + pad(n) + '.jpg" alt=""></button>';
+    }
+    document.getElementById("chips").innerHTML = chapters.map(function (c) {
+      return '<a href="#' + c.id + '">' + esc(c.title) + "<b>" + c.list.length + "</b></a>";
+    }).join("");
+    host.innerHTML = chapters.map(function (c, ci) {
+      var label = "See all " + c.list.length;
+      return '<section class="band chapter" id="' + c.id + '"><div class="inner">' +
+        '<div class="chead"><h2>The <em>' + esc(c.title) + '</em></h2><div class="count">' + c.list.length + " photographs</div></div>" +
+        '<div class="mosaic">' + c.picks.map(function (n) { return tile(n, "f", ci); }).join("") + "</div>" +
+        '<div class="allgrid" hidden></div><button class="seeall" type="button" data-c="' + ci + '">' + label + " <span>↓</span></button>" +
+        "</div></section>";
+    }).join("");
+
+    function more(btn) {
+      var ci = +btn.dataset.c, c = chapters[ci], grid = btn.previousElementSibling, shown = grid.children.length;
+      grid.hidden = false;
+      grid.insertAdjacentHTML("beforeend", c.list.slice(shown, shown + PAGE).map(function (p) { return tile(p[0], "t", ci); }).join(""));
+      var left = c.list.length - grid.children.length;
+      if (left > 0) btn.innerHTML = "Show " + Math.min(left, PAGE) + " more <span>↓</span>";
+      else btn.remove();
+    }
+
+    var lb = document.getElementById("lb"), img = document.getElementById("lb-img"), closeBtn = document.getElementById("lb-x");
+    var cur = { c: 0, i: 0 }, opener = null;
+    var large = function (p) { return "https://lh3.googleusercontent.com/d/" + p[1] + "=w2000"; };
+    function show() {
+      var c = chapters[cur.c], p = c.list[cur.i];
+      img.onerror = function () { img.onerror = null; img.src = "assets/photos/t/" + pad(p[0]) + ".jpg"; };
+      img.src = large(p);
+      document.getElementById("lb-where").textContent = "The " + c.title;
+      document.getElementById("lb-pos").textContent = (cur.i + 1) + " of " + c.list.length;
+      document.getElementById("lb-dl").href = "https://drive.google.com/uc?export=download&id=" + p[2];
+      [c.list[cur.i + 1], c.list[cur.i - 1]].forEach(function (q) { if (q) new Image().src = large(q); });
+    }
+    function step(d) { var n = chapters[cur.c].list.length; cur.i = (cur.i + d + n) % n; show(); }
+    function close() {
+      lb.classList.remove("open");
+      document.body.style.overflow = "";
+      img.onerror = null;
+      img.removeAttribute("src");
+      if (opener) opener.focus();
+    }
+    host.addEventListener("click", function (e) {
+      var s = e.target.closest(".seeall");
+      if (s) { more(s); return; }
+      var t = e.target.closest(".tile");
+      if (!t) return;
+      var ci = +t.dataset.c, n = +t.dataset.n;
+      cur = { c: ci, i: chapters[ci].list.findIndex(function (p) { return p[0] === n; }) };
+      opener = t;
+      lb.classList.add("open");
+      document.body.style.overflow = "hidden";
+      show();
+      closeBtn.focus();
+    });
+    closeBtn.addEventListener("click", close);
+    document.getElementById("lb-prev").addEventListener("click", function () { step(-1); });
+    document.getElementById("lb-next").addEventListener("click", function () { step(1); });
+    document.addEventListener("keydown", function (e) {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") step(-1);
+      else if (e.key === "ArrowRight") step(1);
+    });
+    var startX = null;
+    img.addEventListener("touchstart", function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    img.addEventListener("touchend", function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      startX = null;
+      if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+    });
   }
 
   /* ---------- home snapshots ---------- */
