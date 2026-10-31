@@ -228,7 +228,7 @@
       grid.hidden = false;
       grid.insertAdjacentHTML("beforeend", c.list.slice(shown, shown + PAGE).map(function (p) { return tile(p[0], "t", ci); }).join(""));
       var left = c.list.length - grid.children.length;
-      if (left > 0) btn.innerHTML = "Show " + Math.min(left, PAGE) + " more <span>↓</span>";
+      if (left > 0) btn.innerHTML = "Show more · " + grid.children.length + " of " + c.list.length + " <span>↓</span>";
       else btn.remove();
     }
 
