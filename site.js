@@ -20,7 +20,8 @@
     ["notes.html", "Notes", "notes"],
     ["photos.html", "Photos", "photos"],
     ["video.html", "The films", "video"],
-    ["artisans.html", "The artisans", "artisans"]
+    ["artisans.html", "The artisans", "artisans"],
+    ["registry.html", "Registry", "registry"]
   ];
 
   function renderHeader() {
