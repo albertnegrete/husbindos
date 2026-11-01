@@ -22,17 +22,14 @@
     ["video.html", "The films", "video"],
     ["artisans.html", "The artisans", "artisans"]
   ];
-  var NAV_LAST = ["registry.html", "Registry", "registry"]; // sits after the invite link
 
   function renderHeader() {
     var h = document.getElementById("site-header");
     if (!h) return;
-    var link = function (n) {
+    var links = NAV.map(function (n) {
       return '<a href="' + n[0] + '"' + (n[2] === page ? ' aria-current="page"' : "") + ">" + n[1] + "</a>";
-    };
-    var links = NAV.map(link).join("");
+    }).join("");
     if (C.INVITE_URL) links += '<a class="ext" href="' + esc(C.INVITE_URL) + '" target="_blank" rel="noopener">The invite ↗</a>';
-    links += link(NAV_LAST);
     h.className = "nav band";
     h.innerHTML =
       '<div class="inner"><a class="brand" href="index.html">husbindos.</a>' +
