@@ -19,8 +19,8 @@
     ["index.html", "Home", "home"],
     ["notes.html", "Notes", "notes"],
     ["photos.html", "Photos", "photos"],
-    ["registry.html", "Registry", "registry"],
     ["video.html", "The films", "video"],
+    ["registry.html", "Registry", "registry"],
     ["artisans.html", "The artisans", "artisans"]
   ];
 
