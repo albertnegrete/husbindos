@@ -20,7 +20,8 @@
     ["notes.html", "Notes", "notes"],
     ["photos.html", "Photos", "photos"],
     ["registry.html", "Registry", "registry"],
-    ["video.html", "The films", "video"]
+    ["video.html", "The films", "video"],
+    ["artisans.html", "The artisans", "artisans"]
   ];
 
   function renderHeader() {
@@ -50,7 +51,7 @@
       '<div class="inner grid">' +
       '<div class="crest"><img src="' + BIRD_L_PLUM + '" alt="" aria-hidden="true"><div class="wm">husbindos.</div><img src="' + BIRD_R_PLUM + '" alt="" aria-hidden="true"></div>' +
       '<div class="cols">' +
-      '<div><div class="eyebrow">Around the site</div><a href="notes.html">Thank-you notes</a><a href="photos.html">Photos</a><a href="registry.html">Registry</a><a href="video.html">The films</a><a href="thanks.html">With thanks</a></div>' +
+      '<div><div class="eyebrow">Around the site</div><a href="notes.html">Thank-you notes</a><a href="photos.html">Photos</a><a href="registry.html">Registry</a><a href="video.html">The films</a><a href="artisans.html">The artisans</a></div>' +
       '<div><div class="eyebrow">The day</div>' + esc((C.NAMES || []).join(" & ")) + "<br>" + esc(C.DATE_LONG || "") + "<br>" + esc(C.VENUE || "") +
       (C.INVITE_URL ? '<br><a href="' + esc(C.INVITE_URL) + '" target="_blank" rel="noopener" style="margin-top:8px">The original invite ↗</a>' : "") + "</div>" +
       "</div>" +
