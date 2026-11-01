@@ -20,17 +20,19 @@
     ["notes.html", "Notes", "notes"],
     ["photos.html", "Photos", "photos"],
     ["video.html", "The films", "video"],
-    ["registry.html", "Registry", "registry"],
     ["artisans.html", "The artisans", "artisans"]
   ];
+  var NAV_LAST = ["registry.html", "Registry", "registry"]; // sits after the invite link
 
   function renderHeader() {
     var h = document.getElementById("site-header");
     if (!h) return;
-    var links = NAV.map(function (n) {
+    var link = function (n) {
       return '<a href="' + n[0] + '"' + (n[2] === page ? ' aria-current="page"' : "") + ">" + n[1] + "</a>";
-    }).join("");
+    };
+    var links = NAV.map(link).join("");
     if (C.INVITE_URL) links += '<a class="ext" href="' + esc(C.INVITE_URL) + '" target="_blank" rel="noopener">The invite ↗</a>';
+    links += link(NAV_LAST);
     h.className = "nav band";
     h.innerHTML =
       '<div class="inner"><a class="brand" href="index.html">husbindos.</a>' +
